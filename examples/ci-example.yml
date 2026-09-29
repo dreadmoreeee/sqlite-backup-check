@@ -1,0 +1,5 @@
+# Example CI job (copy into your own CI system; not active in this repository).
+test:
+  steps:
+    - run: pip install pytest cryptography
+    - run: python -m pytest -q -p no:cacheprovider --import-mode=importlib

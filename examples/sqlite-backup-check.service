@@ -1,0 +1,9 @@
+[Unit]
+Description=SQLite backup with verification (example.com app)
+
+[Service]
+Type=oneshot
+User=app
+ExecStart=/usr/local/bin/sqlite-backup-check backup /srv/app/data/app.sqlite /var/backups/app --verify --passphrase-file /etc/app/backup.key
+ExecStartPost=/usr/local/bin/sqlite-backup-check rotate /var/backups/app --keep-daily 7 --keep-weekly 4 --keep-monthly 6
+# Exit 1 (verification failed) or 2 (usage/IO error) marks the unit failed.

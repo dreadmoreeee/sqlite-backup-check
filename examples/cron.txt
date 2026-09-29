@@ -1,0 +1,5 @@
+# /etc/cron.d/sqlite-backup-check  -- nightly backup, verified, then rotate
+# The passphrase file is read by the tool; it is never passed on the command line.
+15 3 * * *  app  sqlite-backup-check backup /srv/app/data/app.sqlite /var/backups/app --verify --passphrase-file /etc/app/backup.key && sqlite-backup-check rotate /var/backups/app --keep-daily 7 --keep-weekly 4 --keep-monthly 6
+# Weekly re-verification of everything on disk (exit 1 if anything is bad):
+40 4 * * 0  app  sqlite-backup-check verify /var/backups/app --passphrase-file /etc/app/backup.key

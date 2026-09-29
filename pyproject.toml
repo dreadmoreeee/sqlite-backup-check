@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sqlite-backup-check"
+version = "0.1.0"
+description = "Safe SQLite backups: online backup API, checksums, GFS rotation, restore-and-verify, optional encryption."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Marvin Palencia" }]
+keywords = ["sqlite", "backup", "verify", "rotation", "cron"]
+dependencies = []
+
+[project.optional-dependencies]
+encrypt = ["cryptography>=41"]
+zstd = ["zstandard>=0.21"]
+test = ["pytest>=7"]
+
+[project.scripts]
+sqlite-backup-check = "sqlite_backup_check.cli:main"
+
+[tool.setuptools]
+packages = ["sqlite_backup_check"]
